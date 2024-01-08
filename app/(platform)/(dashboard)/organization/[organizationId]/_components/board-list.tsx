@@ -1,8 +1,26 @@
 import FormPopover from '@/components/form/form-popover';
 import Hint from '@/components/hint';
 import { HelpCircle, User2 } from 'lucide-react';
+import { prisma } from '@/lib/db';
+import { auth } from '@clerk/nextjs';
+import { redirect } from 'next/navigation';
+import Link from 'next/link';
+import { Skeleton } from '@/components/ui/skeleton';
 
-const BoardList = () => {
+const BoardList = async () => {
+  const { orgId } = auth();
+
+  if (!orgId) return redirect('/select-org');
+
+  const boards = await prisma.board.findMany({
+    where: {
+      orgId,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+
   return (
     <div className='space-y-4'>
       <div className='flex items-center font-semibold text-lg text-neutral-700'>
@@ -10,6 +28,19 @@ const BoardList = () => {
         <span>Your Boards</span>
       </div>
       <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4'>
+        {boards.map((board) => {
+          return (
+            <Link
+              style={{ backgroundImage: `url(${board.imageThumbUrl})` }}
+              className='group relative aspect-video bg-no-repeat bg-center bg-cover bg-sky-700 rounded-sm w-full h-full p-2 overflow-hidden'
+              href={`/board/${board.id}`}
+              key={board.id}
+            >
+              <div className='absolute inset-0 bg-black/30 group-hover:bg-black/40 transition'></div>
+              <p className='text-white relative font-semibold'>{board.title}</p>
+            </Link>
+          );
+        })}
         <FormPopover sideOffset={10} side='right'>
           <div
             role='button'
@@ -28,6 +59,18 @@ const BoardList = () => {
           </div>
         </FormPopover>
       </div>
+    </div>
+  );
+};
+
+BoardList.Skeleton = function BoardListSkeleton() {
+  return (
+    <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4'>
+      {Array.from({ length: 8 }).map((_, idx) => {
+        return (
+          <Skeleton key={idx} className='aspect-video h-full w-full p-2' />
+        );
+      })}
     </div>
   );
 };
