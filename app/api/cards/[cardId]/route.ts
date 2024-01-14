@@ -1,10 +1,9 @@
-import { auth } from '@clerk/nextjs';
-import { NextApiRequest } from 'next';
-import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
+import { auth } from '@clerk/nextjs';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
-  req: NextApiRequest,
+  req: NextRequest,
   { params: { cardId } }: { params: { cardId: string } }
 ) {
   try {
