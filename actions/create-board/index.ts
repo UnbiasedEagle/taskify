@@ -6,6 +6,8 @@ import { auth } from '@clerk/nextjs';
 import { revalidatePath } from 'next/cache';
 import { CreateBoardSchema } from './schema';
 import { InputType, ReturnType } from './types';
+import { createAuditLog } from '@/lib/create-audit-log';
+import { ACTION, ENTITY_TYPE } from '@prisma/client';
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth();
@@ -46,6 +48,13 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         imageLinkHTML,
         imageUserName,
       },
+    });
+
+    await createAuditLog({
+      entityId: board.id,
+      entityTitle: board.title,
+      entityType: ENTITY_TYPE.BOARD,
+      action: ACTION.CREATE,
     });
   } catch (error) {
     return {
