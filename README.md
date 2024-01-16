@@ -1,36 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Taskify
 
-## Getting Started
+Taskify is a feature-rich project management application that allows users to organize tasks efficiently within organizations or workspaces. It comes with authentication, board creation, list management, and card functionalities, making it a comprehensive tool for project collaboration.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Authentication**: Secure user authentication system to protect user accounts and data.
+- **Organizations / Workspaces**: Users can create and manage multiple organizations or workspaces for distinct projects.
+- **Board Creation**: Easily create boards to represent different projects or aspects of your organization.
+- **Unsplash API Integration**: Utilizes the Unsplash API to fetch random beautiful cover images for your boards.
+- **Activity Log**: Keeps a detailed log of activities within the entire organization, providing transparency and accountability.
+- **Board Operations**: Allows users to rename and delete boards for better organization management.
+- **List Management**: Create, rename, delete, drag & drop reorder, and copy lists for effective task categorization.
+- **Card Management**: Create, describe, rename, delete, drag & drop reorder, and copy cards to keep tasks organized.
+- **Card Activity Log**: Tracks changes and activities related to each card for detailed progress monitoring.
+- **Board Limits**: Sets limits on the number of boards for each organization, helping users manage resources efficiently.
+- **Stripe Subscription Integration**: Enables Stripe subscription for organizations to unlock unlimited boards based on their subscription plan.
+- **Landing Page**: A visually appealing landing page to introduce and showcase the application.
+- **Database**: Utilizes MySQL database with Prisma ORM for efficient data storage and retrieval.
+- **UI Frameworks**: Built with shadcnUI & TailwindCSS for a responsive and modern user interface.
